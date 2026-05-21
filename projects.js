@@ -26,12 +26,11 @@
 const projects = [
   {
     title: "Emba",
-    // TODO Jack: replace with a real one/two-sentence description of Emba.
     description:
-      "Emba — describe what it is, what it does, and what you designed or built. (Placeholder: edit this.)",
-    specs: ["TODO: specs"], // TODO: components/techniques, e.g. "op-amp", "PCB"
+      "A morning-ritual system: a hand-printed, pebble-sized device that sits across the room, paired with an iOS app. Tapping it dismisses your alarm and can lock your phone for up to an hour, building in just enough friction to get you into sunlight, water, and movement before a screen.",
+    specs: ["hand-printed hardware", "iOS app", "habit tracking", "behavioral design", "local-only / no telemetry"],
     image: "", // e.g. "images/emba.jpg" — drop a photo in images/ and set the path
-    links: [], // e.g. { label: "Build log", url: "https://..." }
+    links: [{ label: "getemba.com", url: "https://getemba.com" }],
     featured: true,
   },
   {
