@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- EDIT ME: your name + a one-line description for search engines / link previews -->
+    <title>Jack Adams — Portfolio</title>
+    <meta name="description" content="Portfolio of Jack Adams — selected projects and work." />
+
+    <!-- Open Graph: makes a nice preview card when the link is shared -->
+    <meta property="og:title" content="Jack Adams — Portfolio" />
+    <meta property="og:description" content="Portfolio of Jack Adams — selected projects and work." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://trailtree.github.io" />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <!-- Tailwind via CDN: no build step required -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+            },
+            colors: {
+              accent: { DEFAULT: '#2563eb', dark: '#1d4ed8' }, // edit to recolor the site
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      /* subtle card lift on hover */
+      .card { transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+      .card:hover { transform: translateY(-3px); }
+    </style>
+  </head>
+
+  <body class="bg-white text-slate-800 font-sans antialiased">
+    <!-- ===================== HERO ===================== -->
+    <header class="mx-auto max-w-3xl px-6 pt-28 pb-20 text-center">
+      <!-- EDIT ME: your name, title, tagline -->
+      <p class="mb-4 text-sm font-medium uppercase tracking-widest text-accent">Analog &amp; Hardware Designer</p>
+      <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">Jack Adams</h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+        A one-line tagline about the devices you design and build. Keep it short and confident.
+      </p>
+
+      <div class="mt-10 flex items-center justify-center gap-4">
+        <a
+          href="#projects"
+          class="rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-accent-dark"
+        >
+          View Projects
+        </a>
+        <!-- EDIT ME: your GitHub URL -->
+        <a
+          href="https://github.com/TrailTree"
+          class="rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:bg-slate-50"
+        >
+          GitHub
+        </a>
+      </div>
+    </header>
+
+    <!-- ===================== PROJECTS ===================== -->
+    <main id="projects" class="mx-auto max-w-5xl px-6 pb-24">
+      <h2 class="mb-2 text-2xl font-bold tracking-tight text-slate-900">Projects</h2>
+      <p class="mb-10 text-slate-500">A selection of devices I've designed and built.</p>
+
+      <!-- Cards render here from projects.js -->
+      <div id="project-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="border-t border-slate-100">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-8 text-sm text-slate-500">
+        <span>&copy; <span id="year"></span> Jack Adams</span>
+        <a href="https://github.com/TrailTree" class="hover:text-accent">GitHub</a>
+      </div>
+    </footer>
+
+    <!-- Load project data, then render -->
+    <script src="projects.js"></script>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const escapeHtml = (s) =>
+        String(s).replace(/[&<>"']/g, (c) =>
+          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+        );
+
+      const linkBtn = (l) =>
+        l && l.url
+          ? `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener"
+                class="text-sm font-semibold text-accent hover:text-accent-dark">${escapeHtml(l.label || 'Link')} &rarr;</a>`
+          : '';
+
+      const tagPill = (t) =>
+        `<span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">${escapeHtml(t)}</span>`;
+
+      // Photo at top of card (object-cover keeps mixed sizes tidy); neutral
+      // placeholder when no image is set.
+      const photo = (p) =>
+        p.image
+          ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy"
+                  class="aspect-[4/3] w-full rounded-lg object-cover bg-slate-100" />`
+          : `<div class="flex aspect-[4/3] w-full items-center justify-center rounded-lg bg-slate-100 text-slate-400">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="1.5">
+                 <path stroke-linecap="round" stroke-linejoin="round"
+                       d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M2.25 18.75h19.5M3.75 4.5h16.5a1.5 1.5 0 011.5 1.5v12a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V6a1.5 1.5 0 011.5-1.5z" />
+               </svg>
+             </div>`;
+
+      const card = (p) => {
+        const links = (p.links || []).filter((l) => l && l.url);
+        const specs = p.specs || [];
+        return `
+        <article class="card flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm
+                         ${p.featured ? 'sm:col-span-2 lg:col-span-2' : ''}">
+          ${photo(p)}
+          <div class="flex flex-1 flex-col px-2 pt-4 pb-1">
+            <h3 class="text-lg font-semibold text-slate-900">${escapeHtml(p.title)}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">${escapeHtml(p.description)}</p>
+            ${specs.length ? `<div class="mt-4 flex flex-wrap gap-2">${specs.map(tagPill).join('')}</div>` : ''}
+            ${links.length ? `<div class="mt-5 flex flex-wrap gap-5">${links.map(linkBtn).join('')}</div>` : ''}
+          </div>
+        </article>`;
+      };
+
+      const sorted = [...projects].sort((a, b) => (b.featured === true) - (a.featured === true));
+      document.getElementById('project-grid').innerHTML = sorted.map(card).join('');
+    </script>
+  </body>
+</html>
