@@ -29,17 +29,17 @@ const projects = [
     description:
       "A morning-ritual system: a hand-printed, pebble-sized device that sits across the room, paired with an iOS app. Tapping it dismisses your alarm and can lock your phone for up to an hour, building in just enough friction to get you into sunlight, water, and movement before a screen.",
     specs: ["hand-printed hardware", "iOS app", "habit tracking", "behavioral design", "local-only / no telemetry"],
-    image: "images/emba.png", // swap for a photo of the physical device if you have one
+    image: "images/emba.jpg", // hero screenshot of the app; swap for a device photo if you have one
     links: [{ label: "getemba.com", url: "https://getemba.com" }],
     featured: true,
   },
   {
-    title: "Device Two",
+    title: "Roger Mayer Octavia replica",
     description:
-      "Describe what it is, the interesting engineering, and the result. Keep it to a line or two so cards stay tidy.",
-    specs: ["analog filter", "discrete transistors", "hand-wired"],
+      "Work in progress — a from-scratch build of the Roger Mayer Octavia, the octave-up fuzz famously used by Jimi Hendrix. Currently dialing in the germanium fuzz stage and the transformer-based octave-doubling circuit before laying out the PCB and boxing it up.",
+    specs: ["guitar pedal", "germanium fuzz", "octave-up", "audio transformer", "WIP"],
     image: "",
-    links: [{ label: "Schematic (PDF)", url: "https://example.com/schematic.pdf" }],
+    links: [],
   },
   {
     title: "Device Three",
