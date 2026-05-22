@@ -36,9 +36,9 @@ const projects = [
   {
     title: "Roger Mayer Octavia replica",
     description:
-      "Work in progress — a from-scratch build of the Roger Mayer Octavia, the octave-up fuzz famously used by Jimi Hendrix. Currently dialing in the germanium fuzz stage and the transformer-based octave-doubling circuit before laying out the PCB and boxing it up.",
-    specs: ["guitar pedal", "germanium fuzz", "octave-up", "audio transformer", "WIP"],
-    image: "",
+      "Work in progress — a from-scratch build of the Roger Mayer Octavia, the octave-up fuzz famously used by Jimi Hendrix. Working from the original schematic: an all-silicon design (2N3906 / MPS-A13 transistors, 1N4148 diodes) that generates its signature octave overtone without a transformer, before laying out the PCB and boxing it up.",
+    specs: ["guitar pedal", "octave-up fuzz", "silicon transistors", "diode clipping", "WIP"],
+    image: "images/octavia-schematic.gif", // placeholder schematic until build photos exist
     links: [],
   },
   {
